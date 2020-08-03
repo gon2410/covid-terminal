@@ -67,6 +67,7 @@ def main():
 		numbers.insert(0, i)
 		data.append(numbers)
 
+	# sort by infected
 	data.sort(key=sort_infected, reverse=True)
 
 	table = tt.to_string(
