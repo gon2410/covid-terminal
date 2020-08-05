@@ -16,8 +16,10 @@ import termtables as tt
 # other
 import threading, sys, time
 
+
 def sort_infected(elem):
 	return elem[1]
+
 
 def animated_loading():
 	for char in ('/-\|'):
@@ -36,8 +38,45 @@ def find_string(elem):
 
 
 def main():
-	countries = ['Argentina', 'Uruguay', 'Paraguay',
-				 'Ecuador', 'Colombia', 'Peru', 'Venezuela', 'Brazil']
+	lista = sys.argv
+
+	if len(lista) == 1:
+		print('Unknown Argument')
+		quit()
+
+	elif lista[1] == 'south':
+		countries_list = ['Argentina', 'Bolivia', 'Brazil',
+				          'Colombia', 'Ecuador', 'Guyana',
+				          'Paraguay', 'Peru', 'Suriname',
+				          'Uruguay', 'Venezuela', 'French_Guiana']
+
+	elif lista[1] == 'central':
+		 countries_list = ['El_Salvador', 'Costa_Rica', 'Belize',
+		                   'Guatemala', 'Honduras', 'Nicaragua', 'Panama']
+
+	elif lista[1] == 'north':
+		pass
+
+	elif lista[1] == 'europe':
+		countries_list = ['Austria', 'Italy', 'Belgium', 'Latvia',
+                          'Bulgaria', 'Lithuania', 'Croatia', 'Luxembourg',
+						  'Cyprus',	'Malta', 'Czechia', 'Netherlands',
+ 						  'Denmark', 'Poland', 'Estonia', 'Portugal',
+						  'Finland', 'Romania', 'France', 'Slovakia'
+						  'Germany', 'Slovenia', 'Greece', 'Spain'
+						  'Hungary', 'Sweden', 'Ireland']
+
+	elif lista[1] == 'asia':
+		pass
+
+	elif lista[1] == 'ocean':
+		pass
+
+	else:
+		print('Unknown Argument')
+		quit()
+
+	countries = countries_list
 	data = []
 
 	for i in countries:
@@ -86,3 +125,4 @@ if __name__ == '__main__':
 	while the_process.is_alive():
 		animated_loading()
 	print()
+
