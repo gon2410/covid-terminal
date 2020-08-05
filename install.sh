@@ -4,7 +4,6 @@ echo 'Installing Dependencies..'
 
 sudo pacman -S python3
 
-pip install selenium
 pip install termtables
 pip install termcolor
 pip install beautifulsoup4
