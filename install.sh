@@ -2,7 +2,7 @@
 
 echo 'Installing Dependencies..'
 
-sudo pacman -S python3
+sudo pacman -S python3 python-pip
 
 pip install termtables
 pip install termcolor
