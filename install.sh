@@ -1,19 +1,42 @@
 #!/usr/bin/env sh
 
 echo 'Installing Dependencies..'
+# check the type of distribution
+var=$(uname -n)
 
-# check if python is installed
-if sudo pacman -Qi python > /dev/null; then
-    echo 'python is already installed'
-else
-    sudo pacman -S python
-fi
+if [[ $var == 'debian' || $var == 'ubuntu' || $var == 'mint' ]]; then
+    echo 'You have a debian based distro'
+    
+    # check if python is installed
+    if sudo apt list python > /dev/null; then
+        echo 'python is already installed'
+    else
+        sudo apt-get install python
+    fi
 
-# check if python-pip is installed
-if sudo pacman -Qi python-pip > /dev/null; then
-    echo 'python-pip is already installed'
-else
-    sudo pacman -S python-pip
+    # check if python-pip is installed
+    if sudo apt list python-pip > /dev/null; then
+        echo 'python-pip is already installed'
+    else
+        sudo apt-get install python-pip 
+    fi
+
+elif [[ $var == 'arch' ]]; then
+    echo 'You have an arch base distro'
+
+    # check if python is installed
+    if sudo pacman -Qi python > /dev/null; then
+        echo 'python is already installed'
+    else
+        sudo pacman -S python
+    fi
+
+    # check if python-pip is installed
+    if sudo pacman -Qi python-pip > /dev/null; then
+        echo 'python-pip is already installed'
+    else
+        sudo pacman -S python-pip
+    fi
 fi
 
 # install python libraries
@@ -24,7 +47,7 @@ else
 fi
 
 if python -c 'import termcolor' > /dev/null; then
-    echo 'termcolors is already installed'
+    echo 'termcolor is already installed'
 else
     pip install termcolor
 fi
