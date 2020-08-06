@@ -26,7 +26,7 @@ fi
 if python3 -c 'import termcolor' > /dev/null; then
     echo 'termcolor is already installed'
 else
-        pip3 install termcolor
+    pip3 install termcolor
 fi
 
 if python3 -c 'import bs4' > /dev/null; then
