@@ -15,19 +15,19 @@ else
 fi
 
 # install python libraries
-if python -c 'import termtables' > /dev/null; then
+if python3 -c 'import termtables' > /dev/null; then
     echo 'termtables is already installed'
 else
     pip3 install termtables
 fi
 
-if python -c 'import termcolor' > /dev/null; then
+if python3 -c 'import termcolor' > /dev/null; then
     echo 'termcolor is already installed'
 else
         pip3 install termcolor
 fi
 
-if python -c 'import bs4' > /dev/null; then
+if python3 -c 'import bs4' > /dev/null; then
     echo 'beautifulsoup4 is already installed'
 else
     pip3 install beautifulsoup4
