@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+echo 'Installing Dependencies..'
+
 # check if python is installed
 if ! dpkg -s python3 >/dev/null 2>&1; then
     sudo apt-get install python3
