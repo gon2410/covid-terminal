@@ -8,14 +8,14 @@ if [[ $var == 'debian' || $var == 'ubuntu' || $var == 'mint' ]]; then
     echo 'You have a debian based distro'
     
     # check if python is installed
-    if sudo apt list python > /dev/null; then
+    if dpkg -s python > /dev/null; then
         echo 'python is already installed'
     else
         sudo apt-get install python
     fi
 
     # check if python-pip is installed
-    if sudo apt list python-pip > /dev/null; then
+    if dpkg -s python-pip > /dev/null; then
         echo 'python-pip is already installed'
     else
         sudo apt-get install python-pip 
