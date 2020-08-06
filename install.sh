@@ -4,7 +4,7 @@ echo 'Installing Dependencies..'
 # check the type of distribution
 var=$(uname -n)
 
-if [[ $var == 'debian' || $var == 'ubuntu' || $var == 'mint' ]]; then
+if [[ $var == 'mint' ]]; then
     echo 'You have a debian based distro'
     
     # check if python is installed
