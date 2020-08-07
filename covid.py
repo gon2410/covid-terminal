@@ -81,7 +81,7 @@ def find_info(elem):
 
 
 def main():
-    lista = sys.argv
+    args = sys.argv
 
     page = requests.get('https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data')
     soup = BeautifulSoup(page.content, 'lxml')
@@ -102,30 +102,30 @@ def main():
 
     arr = [i for i in array if len(i) == 4]
 
-    if len(lista) == 1:        
+    if len(args) == 1:        
         print_table(arr)
 
-    elif lista[1] == 'north':
+    elif args[1] == 'north':
         data = filter(arr, north_america)
         print_table(data)
 
-    elif lista[1] == 'south':
+    elif args[1] == 'south':
         data = filter(arr, south_america)
         print_table(data)
         
-    elif lista[1] == 'europe':
+    elif args[1] == 'europe':
         data = filter(arr, europe)
         print_table(data)
 
-    elif lista[1] == 'oceania':
+    elif args[1] == 'oceania':
         data = filter(arr, oceania)
         print_table(data)
 
-    elif lista[1] == 'asia':
+    elif args[1] == 'asia':
         data = filter(arr, asia)
         print_table(data)
 
-    elif lista[1] == 'africa':
+    elif args[1] == 'africa':
         data = filter(arr, africa)
         print_table(data)
     else:
