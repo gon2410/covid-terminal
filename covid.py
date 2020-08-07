@@ -17,7 +17,7 @@ def animated_loading():
 		sys.stdout.flush()
 
 		
-def parser(elem):
+def find_info(elem):
     line = "".join(elem.splitlines())
     dat = re.findall(r"\>(.*?)\<", line)
     return dat
@@ -36,7 +36,7 @@ def main():
         else:
             data = []
             if i.find('<tr>') != -1:
-                arr = parser(str(i))
+                arr = find_info(str(i))
                 data = [i for i in arr if isinstance(i, str) and len(i) != 0 and i[0] != '[']
                 n += 1
                 array.append(data)
