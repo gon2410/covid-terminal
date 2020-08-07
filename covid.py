@@ -1,24 +1,13 @@
 #!/usr/bin/env python3
 
-# web scraping
-import urllib.request
+
+import requests
 from bs4 import BeautifulSoup
-
-# color
-from termcolor import colored
-
-# regex
+import lxml
 import re
-
-# table
+from termcolor import colored
 import termtables as tt
-
-# other
 import threading, sys, time
-
-
-def sort_infected(elem):
-	return elem[1]
 
 
 def animated_loading():
@@ -27,93 +16,41 @@ def animated_loading():
 		time.sleep(.1)
 		sys.stdout.flush()
 
-
-def find_string(elem):
-	line = re.findall(r"\>(.*?)\<", elem)
-	for i in line:
-		if i in ('Confirmed cases', 'Recovered', 'Deaths'):
-			return line
 		
+def parser(elem):
+    line = "".join(elem.splitlines())
+    dat = re.findall(r"\>(.*?)\<", line)
+    return dat
+
 
 def main():
-	lista = sys.argv
-	countries = []
-	if len(lista) == 1:
-		print('Unknown Argument')
-		quit()
+    page = requests.get('https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data')
+    soup = BeautifulSoup(page.content, 'lxml')
+    tbody = soup.find('tbody')
 
-	elif lista[1] == 'south':
-		countries = ['Argentina', 'Bolivia', 'Brazil',
-				          'Colombia', 'Ecuador', 'Guyana',
-				          'Paraguay', 'Peru', 'Suriname',
-				          'Uruguay', 'Venezuela', 'French_Guiana']
+    n = 0
+    array = []
+    for i in tbody:
+        if n == 231:
+            break
+        else:
+            data = []
+            if i.find('<tr>') != -1:
+                arr = parser(str(i))
+                data = [i for i in arr if isinstance(i, str) and len(i) != 0 and i[0] != '[']
+                n += 1
+                array.append(data)
 
-	elif lista[1] == 'central':
-		 countries = ['El_Salvador', 'Costa_Rica', 'Belize',
-		                   'Guatemala', 'Honduras', 'Nicaragua', 'Panama']
+    arr = [i for i in array if len(i) == 4]
 
-	elif lista[1] == 'north':
-		pass
-
-	elif lista[1] == 'europe':
-		countries = ['Austria', 'Italy', 'Belgium', 'Latvia',
-                          'Bulgaria', 'Lithuania', 'Croatia', 'Luxembourg',
-						  'Cyprus',	'Malta', 'Czechia', 'Netherlands',
- 						  'Denmark', 'Poland', 'Estonia', 'Portugal',
-						  'Finland', 'Romania', 'France', 'Slovakia'
-						  'Germany', 'Slovenia', 'Greece', 'Spain'
-						  'Hungary', 'Sweden', 'Ireland']
-
-	elif lista[1] == 'asia':
-		pass
-
-	elif lista[1] == 'ocean':
-		pass
-
-	else:
-		print('Unknown Argument')
-		quit()
-
-	data = []
-
-	for i in countries:
-		datos = urllib.request.urlopen('https://en.wikipedia.org/wiki/COVID-19_pandemic_in_' + i)
-		soup = BeautifulSoup(datos, features="html.parser")
-		tags = soup('tr')
-		lista = []
-
-		for tag in tags:
-			string = str(tag)
-			if string.find('Confirmed cases') != -1:
-				lista.append(string)
-			elif string.find('Recovered') != -1:
-				lista.append(string)
-			elif string.find('Deaths') != -1:
-				lista.append(string)
-				break
-
-		final = list(map(find_string, lista))
-		numbers = []
-		for n in final:
-			if n is not None:
-				for j in n:
-					if len(j) != 0 and j[0].isnumeric():
-						numbers.append(int(j.replace(',', '')))
-
-		numbers.insert(0, i)
-		data.append(numbers)
-
-	# sort by infected
-	data.sort(key=sort_infected, reverse=True)
-
-	table = tt.to_string(
-		data,
-		header=['Country', colored('Infected', 'yellow'), colored('Recovered', 'green'), colored('Deaths', 'red')],
+    table = tt.to_string(
+		arr,
+		header=['Country', colored('Infected', 'yellow'), colored('Deaths', 'red'), colored('Recovered', 'green')],
 		style=tt.styles.ascii_thin_double,
 		alignment="c"
 	)
 
-	print('\n', table)
+    print('\n', table)
 
 
 if __name__ == '__main__':
@@ -122,3 +59,4 @@ if __name__ == '__main__':
 	while the_process.is_alive():
 		animated_loading()
 	print()
+    
