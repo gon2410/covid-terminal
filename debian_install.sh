@@ -35,6 +35,12 @@ else
     pip3 install beautifulsoup4
 fi
 
+if python3 -c 'import lxml' > /dev/null; then
+    echo 'lxml is already installed'
+else
+    pip3 install lxml
+fi
+
 echo 'Done'
 
 # move main file to /usr/bin and make it executable
