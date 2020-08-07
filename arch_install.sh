@@ -35,6 +35,12 @@ else
     pip install beautifulsoup4
 fi
 
+if python -c 'import termcolor' > /dev/null; then
+    echo 'lxml is already installed'
+else
+    pip install lxml
+fi
+
 echo 'Done'
 
 # move main file to /usr/bin and make it executable
