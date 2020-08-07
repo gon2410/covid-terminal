@@ -35,7 +35,7 @@ else
     pip install beautifulsoup4
 fi
 
-if python -c 'import termcolor' > /dev/null; then
+if python -c 'import lxml' > /dev/null; then
     echo 'lxml is already installed'
 else
     pip install lxml
