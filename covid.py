@@ -49,12 +49,7 @@ africa = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', '
 
 
 def filter(arr, countries_array):
-    data = []
-    for i in arr:
-        if i[0] in countries_array:
-            data.append(i)
-
-    return data
+    return [i for i in arr if i[0] in countries_array]
 
 
 def print_table(arr):
@@ -128,6 +123,7 @@ def main():
     elif args[1] == 'africa':
         data = filter(arr, africa)
         print_table(data)
+		
     else:
         print('Unknown Argument')
         quit()
