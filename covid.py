@@ -13,7 +13,8 @@ import threading, sys, time
 north_america = ['Antigua and Barbuda', 'The Bahamas', 'Barbados', 'Belize', 'Canada', 'Costa Rica',
                  'Cuba', 'Dominica', 'Dominican Republic', 'El Salvador', 'Grenada', 'Guatemala',
                  'Haiti', 'Honduras', 'Jamaica', 'Mexico', 'Nicaragua', 'Panama', 'Saint Kitts and Nevis',
-                 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Trinidad and Tobago', 'United States']
+                 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Trinidad and Tobago', 'United States',
+                 'Anguilla', 'Saint Pierre and Miquelon']
 
 south_america = ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyana', 'Paraguay',
                  'Peru', 'Suriname', 'Uruguay', 'Venezuela', 'French Guiana']
@@ -28,24 +29,21 @@ asia = ['Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan
 
 europe = ['Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria',
            'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany',
-           'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Kosovo', 'Latvia',
-           'Liechtenstein', 'Lithuania', 'Luxembourg', 'North Macedonia', 'Malta', 'Moldova', 'Monaco',
-           'Montenegro', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia', 'San Marino',
-           'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom',
-           'Vatican City']
+           'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania',
+           'Luxembourg', 'North Macedonia', 'Malta', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'Norway',
+           'Poland', 'Portugal', 'Romania', 'Russia', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain',
+           'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City', 'Saba']
 
 oceania = ['Australia', 'Federated States of Micronesia', 'Fiji', 'Kiribati', 'Marshall Islands',
-            'Nauru', 'New Zealand', 'Palau', 'Papua New Guinea', 'Samoa', 'Solomon', 'Tonga', 'Tuvalu',
-            'Vanuatu']
+            'Nauru', 'New Zealand', 'Palau', 'Papua New Guinea', 'Samoa', 'Solomon', 'Tonga', 'Tuvalu', 'Vanuatu']
 
 africa = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 'Cameroon', 'Cape Verde',
            'Central African Republic', 'Chad', 'Comoros', 'Republic of the Congo', 'Democratic Republic of the Congo',
-           "Côte d'Ivoire", 'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Ethiopia', 'Gabon',
-           'The Gambia', 'Ghana', 'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Libya', 'Madagascar',
-           'Malawi', 'Mali', 'Mauritania', 'Mauritius', 'Morocco', 'Mozambique', 'Namibia', 'Niger',
-           'Nigeria', 'Rwanda', 'São Tomé and Príncipe', 'Senegal', 'Seychelles', 'Sierra Leone',
-           'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Tunisia',
-           'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe']
+           "Côte d'Ivoire", 'Djibouti', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Ethiopia', 'Gabon', 'The Gambia', 'Ghana',
+           'Guinea', 'Guinea-Bissau', 'Kenya', 'Lesotho', 'Liberia', 'Libya', 'Madagascar', 'Malawi', 'Mali', 'Mauritania',
+           'Mauritius', 'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Rwanda', 'São Tomé and Príncipe', 'Senegal',
+           'Seychelles', 'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 'Sudan', 'Swaziland', 'Tanzania', 'Togo',
+           'Tunisia', 'Uganda', 'Western Sahara', 'Zambia', 'Zimbabwe']
 
 
 def filter(arr, countries_array):
@@ -78,7 +76,12 @@ def find_info(elem):
 def main():
     args = sys.argv
 
-    page = requests.get('https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data')
+    try:
+        page = requests.get('https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data')
+    except (requests.ConnectionError, requests.Timeout) as exception:
+        print('\nConnection Error')
+        quit()
+          
     soup = BeautifulSoup(page.content, 'lxml')
     tbody = soup.find('tbody')
 
@@ -123,7 +126,7 @@ def main():
     elif args[1] == 'africa':
         data = filter(arr, africa)
         print_table(data)
-		
+        
     else:
         print('Unknown Argument')
         quit()
@@ -135,4 +138,3 @@ if __name__ == '__main__':
 	while the_process.is_alive():
 		animated_loading()
 	print()
-    
