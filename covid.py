@@ -7,7 +7,7 @@ import lxml
 import re
 from termcolor import colored
 import termtables as tt
-import threading, sys, time
+import sys
 
 
 north_america = ['Antigua and Barbuda', 'The Bahamas', 'Barbados', 'Belize', 'Canada', 'Costa Rica',
