@@ -47,13 +47,21 @@ africa = ['Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', '
 
 
 def filter(arr, countries_array):
-    return [i for i in arr if i[0] in countries_array]
+    main_arr = []
+    pos = 1
+    for i in arr:
+        if i[0] in countries_array:
+            i.insert(0, pos)
+            main_arr.append(i)
+            pos += 1
+
+    return main_arr
 
 
 def print_table(arr):
     table = tt.to_string(
 		    arr,
-		    header=['Country', colored('Infected', 'yellow'), colored('Deaths', 'red'), colored('Recovered', 'green')],
+		    header=['Pos', 'Country', colored('Infected', 'yellow'), colored('Deaths', 'red'), colored('Recovered', 'green')],
 		    style=tt.styles.ascii_thin_double,
 		    alignment="c"
 	    )
@@ -90,10 +98,19 @@ def main():
                 data = [i for i in arr if isinstance(i, str) and len(i) != 0 and i[0] != '[']
                 n += 1
                 array.append(data)
+            
 
     arr = [i for i in array if len(i) == 4]
+    
+    if len(args) == 1:
+        pos = 0
+        for i in arr:
+            if i[0] != 'World':
+                i.insert(0, pos)
+            else:
+                i.insert(0, '-')                
+            pos += 1
 
-    if len(args) == 1:        
         print_table(arr)
 
     elif args[1] == 'north':
