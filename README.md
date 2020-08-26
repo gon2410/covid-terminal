@@ -4,9 +4,9 @@ It gathers info from Wikipedia using web-scraping and prints a table showing cou
 
 ### Installation 
 1) Install `python3` and `python-pip`.
-2) `cd covid-terminal`.
+2) Change directory: `cd covid-terminal`.
 2) Run `sudo pip3 install -r requirements.txt` to install the python libraries.
-3) Move `covid.py` to `/usr/bin/` and make it executable: `sudo mv covid.py /usr/bin/covid && sudo chmod +x /usr/bin/covid`.
+3) Move `covid.py` as `covid` to `/usr/bin/` and make it executable: `sudo mv covid.py /usr/bin/covid && sudo chmod +x /usr/bin/covid`.
 
 
 ### Usage
