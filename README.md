@@ -14,6 +14,7 @@ It gathers info from Wikipedia using web-scraping and prints a table showing cou
 - `covid` - shows all the counties.
 - `covid north` - shows north-american countries.
 - `covid south` - shows south-american countries.
+- `covid central`.
 - `covid europe`.
 - `covid oceania`.
 - `covid asia`.
