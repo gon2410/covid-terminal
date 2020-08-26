@@ -57,14 +57,7 @@ def print_table(arr):
 		    style=tt.styles.ascii_thin_double,
 		    alignment="c"
 	    )
-    print('\n', table)
-
-
-def animated_loading():
-	for char in ('/-\|'):
-		sys.stdout.write('\r' + 'gathering data...' + char)
-		time.sleep(.1)
-		sys.stdout.flush()
+    print(table)
 
 
 def find_info(elem):
@@ -133,8 +126,4 @@ def main():
 
 
 if __name__ == '__main__':
-	the_process = threading.Thread(name='process', target=main)
-	the_process.start()
-	while the_process.is_alive():
-		animated_loading()
-	print()
+    main()
