@@ -10,14 +10,14 @@ import termtables as tt
 import sys
 
 
-north_america = ['Antigua and Barbuda', 'The Bahamas', 'Barbados', 'Belize', 'Canada', 'Costa Rica',
-                 'Cuba', 'Dominica', 'Dominican Republic', 'El Salvador', 'Grenada', 'Guatemala',
-                 'Haiti', 'Honduras', 'Jamaica', 'Mexico', 'Nicaragua', 'Panama', 'Saint Kitts and Nevis',
-                 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Trinidad and Tobago', 'United States',
-                 'Anguilla', 'Saint Pierre and Miquelon']
+north_america = ['Antigua and Barbuda', 'The Bahamas', 'Barbados', 'Canada', 'Cuba', 'Dominica', 'Dominican Republic',
+                 'Grenada', 'Haiti', 'Jamaica', 'Mexico', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines',
+                 'Trinidad and Tobago', 'United States', 'Anguilla', 'Saint Pierre and Miquelon', 'Montserrat', 'Greenland']
 
 south_america = ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyana', 'Paraguay',
-                 'Peru', 'Suriname', 'Uruguay', 'Venezuela', 'French Guiana']
+                 'Peru', 'Suriname', 'Uruguay', 'Venezuela', 'French Guiana', 'Falkland Islands']
+
+central_america = ['Belize', 'Costa Rica', 'El Salvador', 'Guatemala', 'Honduras', 'Nicaragua', 'Panama']
 
 asia = ['Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan', 'Brunei',
          'Cambodia', 'China', 'East Timor', 'Georgia', 'India', 'Indonesia', 'Iran', 'Iraq',
@@ -119,6 +119,10 @@ def main():
 
     elif args[1] == 'south':
         data = filter(arr, south_america)
+        print_table(data)
+
+    elif args[1] == 'central':
+        data = filter(arr, central_america)
         print_table(data)
         
     elif args[1] == 'europe':
