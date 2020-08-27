@@ -3,7 +3,7 @@
 It gathers info from Wikipedia using web-scraping and prints a table showing countries and their infection, death and recovery cases.
 
 ### Installation 
-1) Install `python3` and `python-pip`.
+1) Install `python3` and `python-pip` (or `python3-pip`).
 2) Clone the repository.
 3) Change directory: `cd covid-terminal`.
 4) Run `sudo pip3 install -r requirements.txt` to install the python libraries.
