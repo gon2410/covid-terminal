@@ -2,3 +2,4 @@ termtables
 beautifulsoup4
 lxml
 termcolor
+requests
